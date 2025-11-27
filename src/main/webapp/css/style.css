@@ -1,0 +1,164 @@
+/* FONT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* BASIC */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background: #fafafa;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* NAVBAR */
+.navbar {
+    background: #fff;
+    padding: 14px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+}
+
+.nav-left {
+    font-size: 32px;
+}
+
+.nav-right a {
+    margin-left: 20px;
+    font-size: 15px;
+    color: #555;
+}
+
+.nav-right a:hover {
+    color: #007bff;
+}
+
+/* CONTENT LAYOUT */
+.content-wrapper {
+    width: 80%;
+    margin: 30px auto;
+    min-height: 70vh;
+}
+
+/* TITLE */
+.heading {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* TOOLBAR (search + button) */
+.toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
+.toolbar input {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+.toolbar .btn-add {
+    background: #007bff;
+    color: #fff !important;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th {
+    background: #e7f1ff;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+tr:hover {
+    background: #f9f9f9;
+}
+
+/* ICON BUTTONS */
+.icon-btn {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+/* FORM */
+form p {
+    margin: 10px 0;
+    font-size: 15px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+input[type="submit"] {
+    background: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background: #005fcc;
+}
+
+/* FOOTER */
+.footer {
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+    border-top: 1px solid #eee;
+    background: #fff;
+    margin-top: 50px;
+}
+
+.footer a {
+    margin: 0 10px;
+    color: #666;
+}
+
+.footer a:hover {
+    color: #000;
+}
