@@ -31,11 +31,18 @@
 
 <hr style="margin:20px 0;">
 
-<!-- 이미지 표시 (파일 업로드 사용 시) -->
 <c:if test="${not empty post.filename}">
+    <!-- 이미지 보여주기 -->
     <img src="upload/${post.filename}" style="max-width:400px; margin-bottom:20px;">
+    <br>
+
+    <!-- 다운로드 버튼 -->
+    <a href="upload/${post.filename}" download class="btn-add">
+        📥 Download File
+    </a>
     <br><br>
 </c:if>
+
 
 <!-- Content -->
 <p style="line-height:1.7; white-space:pre-wrap;">
