@@ -24,6 +24,7 @@ public class PostDAO {
                 post.setUserid(rs.getString("userid"));
                 post.setContent(rs.getString("content"));
                 post.setRegdate(rs.getString("regdate"));
+                post.setFilename(rs.getString("filename"));   // ★ 추가됨
                 posts.add(post);
             }
         } catch (SQLException e) {
@@ -35,7 +36,7 @@ public class PostDAO {
 
     // 글 추가
     public void addPost(PostVO post) {
-        String sql = "INSERT INTO post (title, userid, content, regdate) VALUES (?, ?, ?, NOW())";
+        String sql = "INSERT INTO post (title, userid, content, filename, regdate) VALUES (?, ?, ?, ?, NOW())";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -43,6 +44,8 @@ public class PostDAO {
             pstmt.setString(1, post.getTitle());
             pstmt.setString(2, post.getUserid());
             pstmt.setString(3, post.getContent());
+            pstmt.setString(4, post.getFilename());   // ★ 추가됨
+
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -51,7 +54,7 @@ public class PostDAO {
 
     // 글 수정
     public void updatePost(PostVO post) {
-        String sql = "UPDATE post SET title = ?, userid = ?, content = ? WHERE id = ?";
+        String sql = "UPDATE post SET title = ?, userid = ?, content = ?, filename = ? WHERE id = ?";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -59,7 +62,9 @@ public class PostDAO {
             pstmt.setString(1, post.getTitle());
             pstmt.setString(2, post.getUserid());
             pstmt.setString(3, post.getContent());
-            pstmt.setInt(4, post.getId());
+            pstmt.setString(4, post.getFilename());     // ★ 추가됨
+            pstmt.setInt(5, post.getId());
+
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,6 +95,7 @@ public class PostDAO {
 
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
+
             if (rs.next()) {
                 post = new PostVO();
                 post.setId(rs.getInt("id"));
@@ -97,6 +103,7 @@ public class PostDAO {
                 post.setUserid(rs.getString("userid"));
                 post.setContent(rs.getString("content"));
                 post.setRegdate(rs.getString("regdate"));
+                post.setFilename(rs.getString("filename"));   // ★ 추가됨
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -117,6 +124,7 @@ public class PostDAO {
             pstmt.setString(2, "%" + keyword + "%");
 
             ResultSet rs = pstmt.executeQuery();
+
             while (rs.next()) {
                 PostVO post = new PostVO();
                 post.setId(rs.getInt("id"));
@@ -124,11 +132,13 @@ public class PostDAO {
                 post.setUserid(rs.getString("userid"));
                 post.setContent(rs.getString("content"));
                 post.setRegdate(rs.getString("regdate"));
+                post.setFilename(rs.getString("filename"));   // ★ 추가됨
                 posts.add(post);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return posts;
     }
 }

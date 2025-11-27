@@ -6,6 +6,7 @@ public class PostVO {
     private String userid;
     private String content;
     private String regdate;
+    private String filename;
 
     // Getters and Setters
     public int getId() {
@@ -47,4 +48,9 @@ public class PostVO {
     public void setRegdate(String regdate) {
         this.regdate = regdate;
     }
+
+    public String getFilename() { return filename; }
+    public void setFilename(String filename) { this.filename = filename; }
+
+
 }

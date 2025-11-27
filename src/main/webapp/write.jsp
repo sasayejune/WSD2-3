@@ -3,7 +3,7 @@
 
 <div class="heading">Create New Post</div>
 
-<form action="${pageContext.request.contextPath}/post/write"
+<form action="write_ok.jsp"
       method="POST"
       enctype="multipart/form-data">
 
@@ -21,6 +21,5 @@
 
     <input type="submit" value="Submit">
 </form>
-
 
 <%@ include file="bottom.jsp" %>
