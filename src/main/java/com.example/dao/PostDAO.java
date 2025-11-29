@@ -201,4 +201,35 @@ public class PostDAO {
     }
 
 
+    public List<PostVO> filterByUser(String userid) {
+        List<PostVO> posts = new ArrayList<>();
+
+        String sql = "SELECT * FROM post WHERE userid = ? ORDER BY id DESC";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, userid);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                PostVO post = new PostVO();
+                post.setId(rs.getInt("id"));
+                post.setTitle(rs.getString("title"));
+                post.setUserid(rs.getString("userid"));
+                post.setContent(rs.getString("content"));
+                post.setRegdate(rs.getString("regdate"));
+                post.setFilename(rs.getString("filename"));
+                post.setCnt(rs.getInt("cnt"));
+                posts.add(post);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return posts;
+    }
+
+
 }

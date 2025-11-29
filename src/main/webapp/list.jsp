@@ -9,15 +9,21 @@
 
     String keyword = request.getParameter("keyword");
     String sort = request.getParameter("sort");
+    String uid = request.getParameter("userid");   // ★ 작성자 필터 추가
 
-    if (keyword != null && !keyword.trim().equals("")) {
+    if (uid != null && !uid.trim().equals("")) {         // ★ 1순위: 작성자 필터
+        posts = dao.filterByUser(uid);
+
+    } else if (keyword != null && !keyword.trim().equals("")) { // 2순위: 검색
         posts = dao.searchPosts(keyword);
-    } else {
+
+    } else {                                             // 3순위: 정렬 or 전체 목록
         posts = dao.listPostsSorted(sort);
     }
 
     request.setAttribute("posts", posts);
 %>
+
 
 <%@ include file="top.jsp" %>
 
@@ -61,7 +67,13 @@
                         ${post.title}
                 </a>
             </td>
-            <td>${post.userid}</td>
+
+            <td>
+                <a href="list.jsp?userid=${post.userid}">
+                        ${post.userid}
+                </a>
+            </td>
+
             <td>${post.regdate}</td>
             <td>
                 <a href="edit.jsp?id=${post.id}" class="icon-btn">✏️</a>
