@@ -4,17 +4,16 @@
 <%@ page import="com.example.model.PostVO" %>
 
 <%
-    // DAO에서 목록 불러오기
     PostDAO dao = new PostDAO();
-
     List<PostVO> posts = null;
 
-    // 검색 키워드 처리
     String keyword = request.getParameter("keyword");
+    String sort = request.getParameter("sort");
+
     if (keyword != null && !keyword.trim().equals("")) {
         posts = dao.searchPosts(keyword);
     } else {
-        posts = dao.listPosts();
+        posts = dao.listPostsSorted(sort);
     }
 
     request.setAttribute("posts", posts);
@@ -24,6 +23,16 @@
 
 <div class="heading">자유게시판</div>
 
+<!-- 정렬 UI 추가 -->
+<form method="get" action="list.jsp" style="margin-bottom: 20px;">
+    <select name="sort">
+        <option value="new"   <%= "new".equals(sort)   ? "selected" : "" %>>최신순</option>
+        <option value="old"   <%= "old".equals(sort)   ? "selected" : "" %>>오래된순</option>
+        <option value="cnt"   <%= "cnt".equals(sort)   ? "selected" : "" %>>조회수순</option>
+        <option value="title" <%= "title".equals(sort) ? "selected" : "" %>>제목순</option>
+    </select>
+    <input type="submit" value="정렬" class="btn-add">
+</form>
 
 <!-- Search + Add toolbar -->
 <div class="toolbar">
@@ -57,7 +66,6 @@
             <td>
                 <a href="edit.jsp?id=${post.id}" class="icon-btn">✏️</a>
 
-                <!-- delete는 삭제 확인 후 delete_ok.jsp로 이동 -->
                 <a href="delete_ok.jsp?id=${post.id}"
                    class="icon-btn"
                    onclick="return confirm('정말 삭제하시겠습니까?');">

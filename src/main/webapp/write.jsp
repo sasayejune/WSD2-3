@@ -4,7 +4,7 @@
 <div class="heading">Create New Post</div>
 
 <form action="write_ok.jsp"
-      method="POST"
+      method="post"
       enctype="multipart/form-data">
 
     <p>Title</p>

@@ -7,11 +7,16 @@
     String idParam = request.getParameter("id");
     int id = Integer.parseInt(idParam);
 
-    // ---- 2) DAO로 글 데이터 조회 ----
+    // ---- 2) DAO 생성 ----
     PostDAO dao = new PostDAO();
+
+    // ---- 3) 조회수 증가 ----
+    dao.updateCount(id);
+
+    // ---- 4) 증가된 조회수를 반영한 post 다시 가져오기 ----
     PostVO post = dao.getPost(id);
 
-    // ---- 3) request에 post 저장 (EL 사용 위해) ----
+    // ---- 5) request에 저장 (EL 사용 위해) ----
     request.setAttribute("post", post);
 %>
 
@@ -27,6 +32,8 @@
     Writer: <strong>${post.userid}</strong>
     &nbsp;&nbsp; | &nbsp;&nbsp;
     Date: <strong>${post.regdate}</strong>
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    Views: <strong>${post.cnt}</strong>   <!-- 조회수 표시 -->
 </p>
 
 <hr style="margin:20px 0;">
@@ -42,7 +49,6 @@
     </a>
     <br><br>
 </c:if>
-
 
 <!-- Content -->
 <p style="line-height:1.7; white-space:pre-wrap;">

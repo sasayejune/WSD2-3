@@ -1,6 +1,7 @@
 package com.example.model;
 
 public class PostVO {
+
     private int id;
     private String title;
     private String userid;
@@ -8,49 +9,29 @@ public class PostVO {
     private String regdate;
     private String filename;
 
-    // Getters and Setters
-    public int getId() {
-        return id;
-    }
+    private int cnt;   // ★ 조회수 추가
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    // --- getters and setters ---
 
-    public String getTitle() {
-        return title;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public String getUserid() {
-        return userid;
-    }
+    public String getUserid() { return userid; }
+    public void setUserid(String userid) { this.userid = userid; }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
+    public String getContent() { return content; }
+    public void setContent(String content) { this.content = content; }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getRegdate() {
-        return regdate;
-    }
-
-    public void setRegdate(String regdate) {
-        this.regdate = regdate;
-    }
+    public String getRegdate() { return regdate; }
+    public void setRegdate(String regdate) { this.regdate = regdate; }
 
     public String getFilename() { return filename; }
     public void setFilename(String filename) { this.filename = filename; }
 
-
+    // ★ 조회수 getter/setter
+    public int getCnt() { return cnt; }
+    public void setCnt(int cnt) { this.cnt = cnt; }
 }

@@ -25,6 +25,7 @@ public class PostDAO {
                 post.setContent(rs.getString("content"));
                 post.setRegdate(rs.getString("regdate"));
                 post.setFilename(rs.getString("filename"));   // ★ 추가됨
+                post.setCnt(rs.getInt("cnt"));
                 posts.add(post);
             }
         } catch (SQLException e) {
@@ -103,7 +104,9 @@ public class PostDAO {
                 post.setUserid(rs.getString("userid"));
                 post.setContent(rs.getString("content"));
                 post.setRegdate(rs.getString("regdate"));
-                post.setFilename(rs.getString("filename"));   // ★ 추가됨
+                post.setFilename(rs.getString("filename"));
+                post.setCnt(rs.getInt("cnt"));
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -132,7 +135,9 @@ public class PostDAO {
                 post.setUserid(rs.getString("userid"));
                 post.setContent(rs.getString("content"));
                 post.setRegdate(rs.getString("regdate"));
-                post.setFilename(rs.getString("filename"));   // ★ 추가됨
+                post.setFilename(rs.getString("filename"));
+                post.setCnt(rs.getInt("cnt"));
+
                 posts.add(post);
             }
         } catch (SQLException e) {
@@ -141,4 +146,59 @@ public class PostDAO {
 
         return posts;
     }
+
+    public void updateCount(int id) {
+        String sql = "UPDATE post SET cnt = cnt + 1 WHERE id = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public List<PostVO> listPostsSorted(String sort) {
+        List<PostVO> posts = new ArrayList<>();
+
+        String sql = "SELECT * FROM post";
+
+        if ("cnt".equals(sort)) {
+            sql += " ORDER BY cnt DESC";
+        } else if ("title".equals(sort)) {
+            sql += " ORDER BY title ASC";
+        } else if ("old".equals(sort)) {
+            sql += " ORDER BY id ASC";
+        } else {
+            sql += " ORDER BY id DESC"; // 기본 최신순(new)
+        }
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                PostVO post = new PostVO();
+                post.setId(rs.getInt("id"));
+                post.setTitle(rs.getString("title"));
+                post.setUserid(rs.getString("userid"));
+                post.setContent(rs.getString("content"));
+                post.setRegdate(rs.getString("regdate"));
+                post.setFilename(rs.getString("filename"));
+                post.setCnt(rs.getInt("cnt"));
+                posts.add(post);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return posts;
+    }
+
+
 }
